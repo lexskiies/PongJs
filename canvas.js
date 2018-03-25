@@ -1,9 +1,10 @@
 
 //variables de configuration
-var vitesse = 5;//plus ce coefficient augmente, plus la balle a une vitesse sur x élevée
+var vitesse = 5;//easy : 5, normal : 10, hard : 15
 var ee = false;
 var nbGameToWin = 3;//nombre de parties a faire pour qu'un joueur gagne
 var nbPlayers = 1;//0 : mode demo, 1 : mode solo, 2 : mode multijoueur
+var tailleRaquette = 100;//hauteur des raquettes en pixels (defaut : 100)
 
 var yBalle;//position de la balle sur l'axe des abscisse 
 var xBalle;//position de la balle sur l'axe des coordonnées
@@ -472,7 +473,7 @@ function init(){
 function drawStick(x,y)
 {
   ctx.beginPath();
-  ctx.rect(x-7.5,y-50,15, 100);
+  ctx.rect(x-7.5,y- tailleRaquette/2,15, tailleRaquette);
   ctx.fillStyle = (ee ? randCol() : "white");
   ctx.fill();
 }
@@ -554,25 +555,25 @@ function touche(event)
 
 function J1up()
 {
-  if(yJ1>50)
+  if(yJ1>tailleRaquette/2)
   yJ1=yJ1-3;
 }
 
 function J2up()
 {
-  if(yJ2>50)
+  if(yJ2>tailleRaquette/2)
   yJ2=yJ2-3;
 }
 
 function J1down()
 {
-  if(yJ1<550)
+  if(yJ1<canHeight - tailleRaquette/2)
   yJ1=yJ1+3;
 }
 
 function J2down()
 {
-  if(yJ2<550)
+  if(yJ2<canHeight - tailleRaquette/2)
   yJ2=yJ2+3;
 }
 
@@ -591,9 +592,9 @@ function perdu(j)
   yJ2 = canHeight/2;
 
   if (j==2)
-  scoreJ1++;
+  	scoreJ1++;
   if (j==1)
-  scoreJ2++;
+  	scoreJ2++;
 
   if (scoreJ1 == nbGameToWin)
   gagne(1);
@@ -623,21 +624,21 @@ function actualiser()
   if(xBalle>=canWidth-17)
   { //coté J2
     deltaXBalle=deltaXBalle*(-1);
-    if(yBalle < yJ2 - 52 || yBalle > yJ2 + 52){
+    if(yBalle < yJ2 - tailleRaquette/2 + 2 || yBalle > yJ2 + tailleRaquette/2 + 2){
     //J2 perdu
     perdu(2);
     }else{
-      deltaYBalle = deltaYBalle + (yBalle - yJ2) / (nbPlayers<2 ? 20*randomPosNeg() : 40);
+      deltaYBalle = deltaYBalle + (yBalle - yJ2) / (nbPlayers<2 ? (tailleRaquette/5)*randomPosNeg() : (2*tailleRaquette/5));
     }
   }
 
   if(xBalle<=17){ // coté J1
     deltaXBalle = deltaXBalle*(-1);
-    if(yBalle < yJ1 - 52 || yBalle > yJ1 + 52 ){
+    if(yBalle < yJ1 - tailleRaquette/2 + 2 || yBalle > yJ1 + tailleRaquette/2 + 2){
       //J2 perdu
       perdu(1);
     }else{
-      deltaYBalle = deltaYBalle + (yBalle - yJ1) / (nbPlayers==0 ? 20*randomPosNeg() : 40);
+      deltaYBalle = deltaYBalle + (yBalle - yJ1) / (nbPlayers==0 ? (tailleRaquette/5)*randomPosNeg() : (2*tailleRaquette/5));
     }
   }
   if(yBalle>=canHeight-10){
@@ -649,13 +650,13 @@ function actualiser()
 
   if (nbPlayers < 2 && deltaXBalle == 1 + vitesse/5)
   {
-    if (yJ2 < yBalle + 20) J2down();
-    if (yJ2 > yBalle - 20) J2up();
+    if (yJ2 < yBalle + tailleRaquette/5) J2down();
+    if (yJ2 > yBalle - tailleRaquette/5) J2up();
   }
   if (nbPlayers == 0 && deltaXBalle == -1 - vitesse/5)
   {
-    if (yJ1 < yBalle + 20) J1down();
-    if (yJ1 > yBalle - 20) J1up();
+    if (yJ1 < yBalle + tailleRaquette/5) J1down();
+    if (yJ1 > yBalle - tailleRaquette/5) J1up();
   }
 
   if(deltaJ2==-1)
@@ -676,9 +677,7 @@ function actualiser()
   drawBalle(xBalle,yBalle);
   drawStick(7.5,yJ1);
   drawStick(canWidth-7.5,yJ2);
-  if (nbPlayers != 0)
-    displayScore();
- // console.log(xBalle+", "+yBalle);
+  displayScore();
 }
 
 function randomPosNeg()
