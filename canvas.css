@@ -1,0 +1,57 @@
+body{
+	background-color: black;
+	margin-top: 7%;
+	text-align: center;
+	font-family: "Ubuntu Light";
+	color: white;
+}
+
+#can{
+
+	border: 3px solid;
+	border-color: white;
+}
+
+h1 {
+	font-size: 120px;
+	margin-bottom: 48px;
+	
+}
+
+button {
+	display: block;
+	margin: auto;
+	font-size: 65px;
+	border: none;
+	background-color: inherit;
+	color: white;
+	font-family: "Ubuntu Light";
+}
+
+#normal {
+	padding-top: 130px;
+	display: block;
+	margin: auto;
+	font-size: 65px;
+	color: white;
+	font-family: "Ubuntu Light";
+}
+
+#menu {
+	padding-top: 70px;
+	text-decoration: underline;
+}
+
+#option {
+	display: inline-block;
+	padding-left: 25px;
+	font-size: 40px;
+}
+
+#divPrincipale {
+	margin: auto;
+	width: 1000px; 
+	height: 600px;
+	border: 3px solid;
+	border-color: white;
+}
