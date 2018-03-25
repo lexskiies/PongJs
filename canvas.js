@@ -1,10 +1,11 @@
 
 //variables de configuration
 var vitesse = 5;//easy : 5, normal : 10, hard : 15
-var ee = false;
 var nbGameToWin = 3;//nombre de parties a faire pour qu'un joueur gagne
 var nbPlayers = 1;//0 : mode demo, 1 : mode solo, 2 : mode multijoueur
 var tailleRaquette = 100;//hauteur des raquettes en pixels (defaut : 100)
+var canWidth = 1400;//largeur du canvas (defaut : 1000)
+var canHeight = 800;//hauteur du canvas (defaut : 600)
 
 var yBalle;//position de la balle sur l'axe des abscisse 
 var xBalle;//position de la balle sur l'axe des coordonnées
@@ -18,9 +19,9 @@ var scoreJ1;//score de J1 (compris entre 0 et nbGameToWin)
 var scoreJ2;//score de J2 (compris entre 0 et nbGameToWin)
 var canvas;//nom du canvas créé
 var ctx;//contexte du canvas
-var canWidth;//largeur du canvas
-var canHeight;//hauteur du canvas
 var act;//variable d'actualisation de la page
+var vitesseRaquettes = canHeight/200;//coefficient de vitesse des plateformes
+var ee = false;
 
 
 
@@ -436,15 +437,13 @@ function debutJeu() {
  Div.remove();
   var canvas = document.createElement("canvas");
   canvas.id = "can";
-  canvas.width = "1000";
-  canvas.height = "600";
+  canvas.width = canWidth;
+  canvas.height = canHeight;
   body.appendChild(canvas);
 
 
   canvas = document.getElementById('can');
   ctx = canvas.getContext("2d");
-  canWidth = canvas.width;
-  canHeight = canvas.height;
   init();
 
   
@@ -556,25 +555,25 @@ function touche(event)
 function J1up()
 {
   if(yJ1>tailleRaquette/2)
-  yJ1=yJ1-3;
+  yJ1=yJ1- vitesseRaquettes;
 }
 
 function J2up()
 {
   if(yJ2>tailleRaquette/2)
-  yJ2=yJ2-3;
+  yJ2=yJ2- vitesseRaquettes;
 }
 
 function J1down()
 {
   if(yJ1<canHeight - tailleRaquette/2)
-  yJ1=yJ1+3;
+  yJ1=yJ1+ vitesseRaquettes;
 }
 
 function J2down()
 {
   if(yJ2<canHeight - tailleRaquette/2)
-  yJ2=yJ2+3;
+  yJ2=yJ2+ vitesseRaquettes;
 }
 
 
