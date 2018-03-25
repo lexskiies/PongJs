@@ -1,10 +1,10 @@
 
 //variables de configuration
-var vitesse = 300;//easy : 5, normal : 10, hard : 15
+var vitesse = 5;//easy : 5, normal : 10, hard : 15
 var ee = false;
 var nbGameToWin = 3;//nombre de parties a faire pour qu'un joueur gagne
 var nbPlayers = 1;//0 : mode demo, 1 : mode solo, 2 : mode multijoueur
-var tailleRaquette = 600;//hauteur des raquettes en pixels (defaut : 100)
+var tailleRaquette = 100;//hauteur des raquettes en pixels (defaut : 100)
 
 var yBalle;//position de la balle sur l'axe des abscisse 
 var xBalle;//position de la balle sur l'axe des coordonnées
