@@ -7,6 +7,7 @@ Contrôle de la barre droite : `P` et `M`.</br>
 Une fois la partie terminée, vous avez la possibilité de relancer la partie en pressant la touche `Espace`.</br>
 Vous pouvez retourner au menu principal à tout moment avec la touche `R`.</br>
 La vitesse et le mode de jeu peuvent être modifiés dans le menu `Options`.</br>
+Il existe trois options de jeu, *Solo*, *Duo* et un mode *Demo* dans lequel 2 IA jouent l'une contre l'autre.</br>
 Petite surprise en appuyant sur les boutons `a` ou `o`</br>
 Vous pouvez vous déplacer dans le Menu avec les touches directionnelles.
 
