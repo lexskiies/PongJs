@@ -2,8 +2,8 @@
 //variables de configuration
 var vitesse = 5;//plus ce coefficient augmente, plus la balle a une vitesse sur x élevée
 var ee = false;
-var nbGameToWin = 2;//nombre de parties a faire pour qu'un joueur gagne
-var nbPlayers = 0;//0 : mode demo, 1 : mode solo, 2 : mode multijoueur
+var nbGameToWin = 3;//nombre de parties a faire pour qu'un joueur gagne
+var nbPlayers = 1;//0 : mode demo, 1 : mode solo, 2 : mode multijoueur
 
 var yBalle;//position de la balle sur l'axe des abscisse 
 var xBalle;//position de la balle sur l'axe des coordonnées
@@ -20,6 +20,9 @@ var ctx;//contexte du canvas
 var canWidth;//largeur du canvas
 var canHeight;//hauteur du canvas
 var act;//variable d'actualisation de la page
+
+
+
 
 function demarrage(){
 	var playFucus=true;
@@ -110,37 +113,56 @@ function demarrage(){
 		var normalFucus=false;
 		var hardFucus=false;
 		var menuFucus=true;
+		
+		var demoFucus=false;
+		var soloFucus=false;
+		var duoFucus=false;
+		
 		titre.remove();
 		play.remove();
 		command.remove();
 		option.remove();
 		quit.remove();
+		
+		var modeTxt1 = document.createElement("p");
+		modeTxt1.id = "normal";
+		modeTxt1.innerHTML = "Please choose the mode";
+		Div.appendChild(modeTxt1);
+		var modeOpt1 = document.createElement("button");
+		var modeOpt2 = document.createElement("button");
+		var modeOpt3 = document.createElement("button");
+		modeOpt1.id = "option";
+		modeOpt1.innerHTML = "Demo";
+		Div.appendChild(modeOpt1);
+		modeOpt2.id = "option";
+		modeOpt2.innerHTML = "Solo";
+		Div.appendChild(modeOpt2);
+		modeOpt3.id = "option";
+		modeOpt3.innerHTML = "Duo";
+		Div.appendChild(modeOpt3);
+		
+		
 		document.addEventListener('keydown',selectionOptions);
 		var txt1 = document.createElement("p");
 		txt1.id = "normal";
 		txt1.innerHTML = "Please choose the speed";
 		Div.appendChild(txt1);
-
 		var opt1 = document.createElement("button");
 		var opt2 = document.createElement("button");
 		var opt3 = document.createElement("button");
-
 		opt1.id = "option";
 		opt1.innerHTML = "Easy";
-		
 		Div.appendChild(opt1);
-
 		opt2.id = "option";
 		opt2.innerHTML = "Normal";
-		
 		Div.appendChild(opt2);
-
 		opt3.id = "option";
 		opt3.innerHTML = "Hard";
-		
 		Div.appendChild(opt3);
 		
-			var menu = document.createElement("button");
+		
+		
+		var menu = document.createElement("button");
 		menu.id = "menu";
 		menu.innerHTML = "MENU";
 		Div.appendChild(menu);
@@ -152,6 +174,9 @@ function demarrage(){
 			opt1.style.textDecoration = "none";
 			opt2.style.textDecoration = "none";
 			opt3.style.textDecoration = "none";
+			modeOpt1.style.textDecoration = "none";
+			modeOpt2.style.textDecoration = "none";
+			modeOpt3.style.textDecoration = "none";
 			menu.style.textDecoration = "none";
 		
 		    if (vitesse==5)
@@ -160,6 +185,12 @@ function demarrage(){
 				opt2.style.textDecoration = "underline dotted";
 			if (vitesse==15)
 				opt3.style.textDecoration = "underline dotted";
+			if (nbPlayers==0)
+				modeOpt1.style.textDecoration = "underline dotted";
+			if (nbPlayers==1)
+				modeOpt2.style.textDecoration = "underline dotted";
+			if (nbPlayers==2)
+				modeOpt3.style.textDecoration = "underline dotted";
 				
 			if (easyFucus)
 				opt1.style.textDecoration = "underline";
@@ -169,11 +200,13 @@ function demarrage(){
 				opt3.style.textDecoration = "underline";
 			if (menuFucus)
 				menu.style.textDecoration = "underline";
-			/*opt1.style.textDecoration = (easyFucus ? "underline" : "none");
-			opt2.style.textDecoration = (normalFucus ? "underline" : "none");
-			opt3.style.textDecoration = (hardFucus ? "underline" : "none");
-			menu.style.textDecoration = (menuFucus ? "underline" : "none");*/
 			
+			if (demoFucus)
+				modeOpt1.style.textDecoration = "underline";
+			if (soloFucus)
+				modeOpt2.style.textDecoration = "underline";
+			if (duoFucus)
+				modeOpt3.style.textDecoration = "underline";
 		}
 		
 		opt1.addEventListener('click', function(){
@@ -188,6 +221,18 @@ function demarrage(){
 			vitesse = 15;
 			soulignageOption();
 		})
+		modeOpt1.addEventListener('click', function(){
+			nbPlayers = 0;
+			soulignageOption();
+		})
+		modeOpt2.addEventListener('click', function(){
+			nbPlayers = 1;
+			soulignageOption();
+		})
+		modeOpt3.addEventListener('click', function(){
+			nbPlayers = 2;
+			soulignageOption();
+		})
 
 		
 		function gotomenu(){
@@ -195,6 +240,10 @@ function demarrage(){
 			opt1.remove();
 			opt2.remove();
 			opt3.remove();
+			modeTxt1.remove();
+			modeOpt1.remove();
+			modeOpt2.remove();
+			modeOpt3.remove();
 			menu.remove();
 			document.removeEventListener('keydown',selectionOptions);
 			demarrage();
@@ -217,58 +266,96 @@ function demarrage(){
 			}
 		
 			if((key==="Enter" || key===" ")){
-				if(easyFucus){
+				if(easyFucus)
 					vitesse = 5;
-					soulignageOption();
-				}
-				if(normalFucus){
+				if(normalFucus)
 					vitesse = 10;
-					soulignageOption();
-				}
-				if(hardFucus){
+				if(hardFucus)
 					vitesse = 15;
-					soulignageOption();
-				}
+				if(demoFucus)
+					nbPlayers = 0;
+				if(soloFucus)
+					nbPlayers = 1;
+				if(duoFucus)
+					nbPlayers = 2;
+				soulignageOption();
 				if(menuFucus){
 					gotomenu();
 				}
 			}
 			
 			function deplacementSelection(direction){
-			if(normalFucus && direction==-2){
-				normalFucus=false;
-				hardFucus=true;
-				soulignageOption();
+				if(normalFucus && direction==-2){
+					normalFucus=false;
+					hardFucus=true;
+					soulignageOption();
+				}
+				if(easyFucus && direction==-2){
+					normalFucus=true;
+					easyFucus=false;
+					soulignageOption();
+				}
+				if(normalFucus && direction==2){
+					normalFucus=false;
+					easyFucus=true;
+					soulignageOption();
+				}
+				if(hardFucus && direction==2){
+					hardFucus=false;
+					normalFucus=true;
+					soulignageOption();
+				}
+				
+				if(soloFucus && direction==2){
+					soloFucus=false;
+					demoFucus=true;
+					soulignageOption();
+				}
+				if(duoFucus && direction==2){
+					duoFucus=false;
+					soloFucus=true;
+					soulignageOption();
+				}
+				
+				if(soloFucus && direction==-2){
+					soloFucus=false;
+					duoFucus=true;
+					soulignageOption();
+				}
+				if(demoFucus && direction==-2){
+					demoFucus=false;
+					soloFucus=true;
+					soulignageOption();
+				}
+				
+				if((normalFucus || easyFucus ||  hardFucus) && direction==-1){
+					normalFucus=false;
+					easyFucus=false;
+					hardFucus=false;
+					menuFucus=true;
+					soulignageOption();
+				}
+				if((normalFucus || easyFucus ||  hardFucus) && direction==1){
+					normalFucus=false;
+					easyFucus=false;
+					hardFucus=false;
+					soloFucus=true;
+					soulignageOption();
+				}
+				if((soloFucus || duoFucus ||  demoFucus) && direction==-1){
+					soloFucus=false;
+					duoFucus=false;
+					demoFucus=false;
+					normalFucus=true;
+					soulignageOption();
+				}
+				
+				if(menuFucus && direction==1){
+					normalFucus=true;
+					menuFucus=false;
+					soulignageOption();
+				}
 			}
-			if(easyFucus && direction==-2){
-				normalFucus=true;
-				easyFucus=false;
-				soulignageOption();
-			}
-			if(normalFucus && direction==2){
-				normalFucus=false;
-				easyFucus=true;
-				soulignageOption();
-			}
-			if(hardFucus && direction==2){
-				hardFucus=false;
-				normalFucus=true;
-				soulignageOption();
-			}
-			if((normalFucus || easyFucus ||  hardFucus) && direction==-1){
-				normalFucus=false;
-				easyFucus=false;
-				hardFucus=false;
-				menuFucus=true;
-				soulignageOption();
-			}
-			if(menuFucus && direction==1){
-				normalFucus=true;
-				menuFucus=false;
-				soulignageOption();
-			}
-
-		}
 		}
 	}
 	
@@ -339,13 +426,13 @@ function demarrage(){
 	}
 }
 
-  function debutJeu() {
+function debutJeu() {
   document.addEventListener('keypress', touche);
   document.addEventListener('keyup', toucheLache);
   var Div = document.getElementById("divPrincipale");
   var body = document.getElementById("body");
 
-  Div.remove();
+ Div.remove();
   var canvas = document.createElement("canvas");
   canvas.id = "can";
   canvas.width = "1000";
@@ -445,8 +532,18 @@ function touche(event)
     deltaJ1=1;
   if(keyr===" " && (scoreJ1 == nbGameToWin || scoreJ2 == nbGameToWin))
     init();
-  if(keyr==="r" || keyr==="R" && (scoreJ1 == nbGameToWin || scoreJ2 == nbGameToWin))
-    location.reload();
+  if(keyr==="r" || keyr==="R" && (scoreJ1 == nbGameToWin || scoreJ2 == nbGameToWin)){
+		var body = document.getElementById("body");
+		var div=document.createElement("div");
+		div.setAttribute("id","divPrincipale");
+		var canvas = document.getElementsByTagName("canvas")[0];
+		canvas.remove();
+		body.appendChild(div);
+		clearInterval(act);
+		document.removeEventListener('keypress', touche);
+		document.removeEventListener('keyup', toucheLache);
+		demarrage();
+	}
   if(keyr==="o" || keyr==="a")
   {
     if (!ee) ee = true;

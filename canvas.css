@@ -29,10 +29,10 @@ button {
 }
 
 #normal {
-	padding-top: 130px;
+	padding-top: 50px;
 	display: block;
 	margin: auto;
-	font-size: 65px;
+	font-size: 50px;
 	color: white;
 	font-family: "Ubuntu Light";
 }
