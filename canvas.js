@@ -1,10 +1,10 @@
 
 //variables de configuration
-var vitesse = 5;//easy : 5, normal : 10, hard : 15
+var vitesse = 300;//easy : 5, normal : 10, hard : 15
 var ee = false;
 var nbGameToWin = 3;//nombre de parties a faire pour qu'un joueur gagne
 var nbPlayers = 1;//0 : mode demo, 1 : mode solo, 2 : mode multijoueur
-var tailleRaquette = 100;//hauteur des raquettes en pixels (defaut : 100)
+var tailleRaquette = 600;//hauteur des raquettes en pixels (defaut : 100)
 
 var yBalle;//position de la balle sur l'axe des abscisse 
 var xBalle;//position de la balle sur l'axe des coordonnées
@@ -624,7 +624,7 @@ function actualiser()
   if(xBalle>=canWidth-17)
   { //coté J2
     deltaXBalle=deltaXBalle*(-1);
-    if(yBalle < yJ2 - tailleRaquette/2 + 2 || yBalle > yJ2 + tailleRaquette/2 + 2){
+    if((yBalle < yJ2 - tailleRaquette/2 + 2 || yBalle > yJ2 + tailleRaquette/2 + 2) && yBalle>=0 && yBalle<=canHeight){
     //J2 perdu
     perdu(2);
     }else{
@@ -634,7 +634,7 @@ function actualiser()
 
   if(xBalle<=17){ // coté J1
     deltaXBalle = deltaXBalle*(-1);
-    if(yBalle < yJ1 - tailleRaquette/2 + 2 || yBalle > yJ1 + tailleRaquette/2 + 2){
+    if((yBalle < yJ1 - tailleRaquette/2 + 2 || yBalle > yJ1 + tailleRaquette/2 + 2)&& yBalle>=0 && yBalle<=canHeight){
       //J2 perdu
       perdu(1);
     }else{
