@@ -512,16 +512,20 @@ function displayScore()
 function toucheLache(event)
 {
    var keyr = event.key;
-  if((keyr==="ArrowUp" || keyr==="p" || keyr==="P"  ) && deltaJ2==-1)
-  	if (nbPlayers==2)
+  if(keyr==="ArrowUp" || keyr==="p" || keyr==="P")
+  {
+  	if (nbPlayers==2 && deltaJ2==-1)
     	deltaJ2=0;
-    if (nbPlayers==1)
+    if (nbPlayers==1 && deltaJ1==-1)
     	deltaJ1=0;
-  if((keyr==="ArrowDown" || keyr==="m" || keyr==="M" ) && deltaJ2==1)
-  	if (nbPlayers==2)
+  }
+  if(keyr==="ArrowDown" || keyr==="m" || keyr==="M")
+  {
+  	if (nbPlayers==2 && deltaJ2==1)
     	deltaJ2=0;
-    if (nbPlayers==1)
+    if (nbPlayers==1 && deltaJ1==1)
     	deltaJ1=0;
+  }
   if(((keyr==="z" || keyr==="Z"  )&& deltaJ1==-1)&&nbPlayers > 0)
     deltaJ1=0;
   if(((keyr==="s" || keyr==="S" )&& deltaJ1==1)&&nbPlayers > 0)
@@ -533,15 +537,19 @@ function touche(event)
 {
   var keyr = event.key;
   if(keyr==="ArrowUp" || keyr==="p" || keyr==="P")
+  {
   	if (nbPlayers==2)
     	deltaJ2=-1;
     if (nbPlayers==1)
     	deltaJ1=-1;
+  }
   if(keyr==="ArrowDown" || keyr==="m" || keyr==="M")
+  {
   	if (nbPlayers==2)
     	deltaJ2=1;
     if (nbPlayers==1)
     	deltaJ1=1;
+  }
   if((keyr==="z" || keyr==="Z")&&nbPlayers > 0)
     deltaJ1=-1;
   if((keyr==="s" || keyr==="S")&&nbPlayers > 0)
