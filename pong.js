@@ -26,7 +26,7 @@ var scoreJ2;//score de J2 (compris entre 0 et nbGameToWin)
 var canvas;//nom du canvas créé
 var ctx;//contexte du canvas
 var act;//variable d'actualisation de la page
-var vitesseRaquettes = canHeight/200;//coefficient de vitesse des plateformes
+var vitesseRaquettes = canHeight/(200*(5/vitesse));//coefficient de vitesse des plateformes
 var ee = false;
 
 //Gestion du menu
