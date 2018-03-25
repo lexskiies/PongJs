@@ -512,10 +512,16 @@ function displayScore()
 function toucheLache(event)
 {
    var keyr = event.key;
-  if(((keyr==="ArrowUp" || keyr==="p" || keyr==="P"  ) && deltaJ2==-1)&&nbPlayers==2)
-    deltaJ2=0;
-  if(((keyr==="ArrowDown" || keyr==="m" || keyr==="M" ) && deltaJ2==1)&&nbPlayers==2)
-    deltaJ2=0;
+  if((keyr==="ArrowUp" || keyr==="p" || keyr==="P"  ) && deltaJ2==-1)
+  	if (nbPlayers==2)
+    	deltaJ2=0;
+    if (nbPlayers==1)
+    	deltaJ1=0;
+  if((keyr==="ArrowDown" || keyr==="m" || keyr==="M" ) && deltaJ2==1)
+  	if (nbPlayers==2)
+    	deltaJ2=0;
+    if (nbPlayers==1)
+    	deltaJ1=0;
   if(((keyr==="z" || keyr==="Z"  )&& deltaJ1==-1)&&nbPlayers > 0)
     deltaJ1=0;
   if(((keyr==="s" || keyr==="S" )&& deltaJ1==1)&&nbPlayers > 0)
@@ -526,10 +532,16 @@ function toucheLache(event)
 function touche(event)
 {
   var keyr = event.key;
-  if((keyr==="ArrowUp" || keyr==="p" || keyr==="P")&&nbPlayers==2)
-    deltaJ2=-1;
-  if((keyr==="ArrowDown" || keyr==="m" || keyr==="M")&&nbPlayers==2)
-    deltaJ2=1;
+  if(keyr==="ArrowUp" || keyr==="p" || keyr==="P")
+  	if (nbPlayers==2)
+    	deltaJ2=-1;
+    if (nbPlayers==1)
+    	deltaJ1=-1;
+  if(keyr==="ArrowDown" || keyr==="m" || keyr==="M")
+  	if (nbPlayers==2)
+    	deltaJ2=1;
+    if (nbPlayers==1)
+    	deltaJ1=1;
   if((keyr==="z" || keyr==="Z")&&nbPlayers > 0)
     deltaJ1=-1;
   if((keyr==="s" || keyr==="S")&&nbPlayers > 0)
@@ -585,11 +597,16 @@ function perdu(j)
 {
   yBalle = canHeight/2;
   xBalle = canWidth/2;
-  deltaXBalle = Math.floor(Math.random()*2);
-  if(deltaXBalle == 0)
-    deltaXBalle = -1-(vitesse/5);
+  if (nbPlayers==1) 
+  	deltaXBalle=1+(vitesse/5);
   else
-    deltaXBalle = 1+(vitesse/5);
+  {
+	  deltaXBalle = Math.floor(Math.random()*2);
+	  if(deltaXBalle == 0)
+	    deltaXBalle = -1-(vitesse/5);
+	  else
+	    deltaXBalle = 1+(vitesse/5);
+  }
   deltaYBalle = Math.random()*2 - 1;
   yJ1 = canHeight/2;
   yJ2 = canHeight/2;
