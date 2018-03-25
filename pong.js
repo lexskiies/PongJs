@@ -461,11 +461,16 @@ function init(){
   scoreJ1 = 0;
   scoreJ2 = 0;
 
-  deltaXBalle=Math.floor(Math.random()*2);
-  if(deltaXBalle==0)
-    deltaXBalle=-1-(vitesse/5);
+  if (nbPlayers==1)
+  	deltaXBalle=1+(vitesse/5);
   else
-    deltaXBalle=1+(vitesse/5);
+  {
+	  deltaXBalle=Math.floor(Math.random()*2);
+	  if(deltaXBalle==0)
+	    deltaXBalle=-1-(vitesse/5);
+	  else
+	    deltaXBalle=1+(vitesse/5);	
+  }
   deltaYBalle=Math.random()*.5 - 0.25;
   clearInterval(act);
   act = window.setInterval(actualiser,1);
