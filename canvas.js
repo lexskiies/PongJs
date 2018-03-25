@@ -1,11 +1,17 @@
+//----------------------------------------
+//variables de configuration paramétrables
+//----------------------------------------
 
-//variables de configuration
 var vitesse = 5;//easy : 5, normal : 10, hard : 15
 var nbGameToWin = 3;//nombre de parties a faire pour qu'un joueur gagne
 var nbPlayers = 1;//0 : mode demo, 1 : mode solo, 2 : mode multijoueur
 var tailleRaquette = 100;//hauteur des raquettes en pixels (defaut : 100)
-var canWidth = 1400;//largeur du canvas (defaut : 1000)
-var canHeight = 800;//hauteur du canvas (defaut : 600)
+var canWidth = 1000;//largeur du canvas (defaut : 1000)
+var canHeight = 600;//hauteur du canvas (defaut : 600)
+
+//--------------------------------------------
+//variables de configuration (ne pas modifier)
+//--------------------------------------------
 
 var yBalle;//position de la balle sur l'axe des abscisse 
 var xBalle;//position de la balle sur l'axe des coordonnées
@@ -23,9 +29,7 @@ var act;//variable d'actualisation de la page
 var vitesseRaquettes = canHeight/200;//coefficient de vitesse des plateformes
 var ee = false;
 
-
-
-
+//Gestion du menu
 function demarrage(){
 	var playFucus=true;
 	var commandFucus=false;
@@ -428,6 +432,7 @@ function demarrage(){
 	}
 }
 
+//Création du canvas
 function debutJeu() {
   document.addEventListener('keypress', touche);
   document.addEventListener('keyup', toucheLache);
@@ -445,11 +450,9 @@ function debutJeu() {
   canvas = document.getElementById('can');
   ctx = canvas.getContext("2d");
   init();
-
-  
-
 }
 
+//Initialisation des valeurs du canvas
 function init(){
   yBalle=canHeight/2;
   xBalle=canWidth/2;
@@ -466,9 +469,9 @@ function init(){
   deltaYBalle=Math.random()*.5 - 0.25;
   clearInterval(act);
   act = window.setInterval(actualiser,1);
- 
 }
 
+//fonctions d'affichage des éléments
 function drawStick(x,y)
 {
   ctx.beginPath();
@@ -504,10 +507,10 @@ function displayScore()
   ctx.fillText(scoreJ1, canWidth/2 - taille.width - 40, canHeight/5);
   ctx.fillText(scoreJ2, canWidth/2 + 40, canHeight/5);
 }
- 
+
+//Event lorsqu'on lache la touche
 function toucheLache(event)
 {
- 
    var keyr = event.key;
   if(((keyr==="ArrowUp" || keyr==="p" || keyr==="P"  ) && deltaJ2==-1)&&nbPlayers==2)
     deltaJ2=0;
@@ -519,6 +522,7 @@ function toucheLache(event)
     deltaJ1=0;
 }
  
+//Event lorsqu'on presse sur une touche
 function touche(event)
 {
   var keyr = event.key;
@@ -551,7 +555,7 @@ function touche(event)
   }
 }
 
-
+//fonctions de dplacement des raquettes
 function J1up()
 {
   if(yJ1>tailleRaquette/2)
@@ -576,7 +580,7 @@ function J2down()
   yJ2=yJ2+ vitesseRaquettes;
 }
 
-
+//Le joueur j a perdu la partie en cours
 function perdu(j)
 {
   yBalle = canHeight/2;
@@ -596,11 +600,12 @@ function perdu(j)
   	scoreJ2++;
 
   if (scoreJ1 == nbGameToWin)
-  gagne(1);
+  	gagne(1);
   if (scoreJ2 == nbGameToWin)
-  gagne(2);
+  	gagne(2);
 }
 
+//le joueur j a gagné 'nbGameToWin' parties
 function gagne(j)
 {
   clearInterval(act);
@@ -614,6 +619,7 @@ function gagne(j)
   ctx.fillText(text, canWidth/2 - taille.width/2, canHeight/2);
 }
 
+//fonction qui modifie les valeurs à afficher à l'ecran toutes les millisecondes
 function actualiser()
 {
   ctx.clearRect(0, 0, canWidth, canHeight);
@@ -679,6 +685,7 @@ function actualiser()
   displayScore();
 }
 
+//return aleatoirement 1 ou -1
 function randomPosNeg()
 {
   var r = Math.floor(Math.random()*2-1);
@@ -686,6 +693,7 @@ function randomPosNeg()
   return -1;
 }
 
+//genere une couleur aleatoire
 function randCol()
 {
   var R = Math.floor(Math.random()*255);
